@@ -1,16 +1,23 @@
 <?php
     require_once __DIR__ ."./phpFiles/recordBdInJson.php";
     require_once __DIR__ ."./phpFiles/databaseConnect.php";
+    require_once __DIR__ ."./phpFiles/xml.php";
     //RecordJson();
 
     $connect = ConnectDb();
 
     $fun = $_GET["task"];
+    $ids = $_GET["uslugaId"];
+        if(isset($fun)){
+            $fun($connect, $ids);
+        }
     try {
-        $ids = $_GET["uslugaId"];
-        $fun($connect, $ids);
+        // $ids = $_GET["uslugaId"];
+        // if(isset($fun)){
+        //     $fun($connect, $ids);
+        // }
     } catch (\Throwable $th) {
-        die("<span style=font-size:16px;><b>Error:</b> Function ".$fun." not found</span>");
+        //die("<span style=font-size:16px;><b>Error:</b> Function ".$fun." not found</span>");
     }
 
 
@@ -47,6 +54,7 @@
             }
         }
         if($data){
+            UpdateXML($data, "./result.xml");
             $status = 200;
             header('HTTP/1.1 '.$status.' Unauthorized', true, $status);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
