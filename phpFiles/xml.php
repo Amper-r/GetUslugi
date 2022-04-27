@@ -1,4 +1,6 @@
 <?php
+    require_once __DIR__ ."/databaseConnect.php";
+
     function UpdateXML($array, $xmlPath, $ftp_server, $ftp_user_name, $ftp_user_pass){
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->formatOutput = true;
@@ -28,6 +30,12 @@
         curl_close ($ch);
         if ($error_no != 0) {
             AddError("File uploaded error");
+        }
+        else{
+            $connect = ConnectDb();
+
+            $date = date('Y-m-d H:i:s');
+            $query =  $connect->query("INSERT INTO `errors` (`id`, `status`, `date_time`, `error`, `error_desc`) VALUES (NULL, 'success', '".$date."', NULL, NULL);");
         }
     }
 ?>
