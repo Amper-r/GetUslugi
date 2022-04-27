@@ -3,7 +3,7 @@
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->formatOutput = true;
         $date = date('Y-m-d H:i:s');
-        $str = "<?xml version='1.0' encoding='utf-8'?><table border='1' style='border-collapse:collapse; text-transform: capitalize;' Data='".$date."'><tr><th>ID:</th><th>Name:</th><th>Organization:</th><th>Payment:</th><th>State duty payment:</th><th>Has electonic view:</th></tr>";
+        $str = "<?xml version='1.0' encoding='utf-8'?><table border='1' style='border-collapse:collapse; text-transform: capitalize;' DateTime='".$date."'><tr><th>ID:</th><th>Name:</th><th>Organization:</th><th>Payment:</th><th>State duty payment:</th><th>Has electonic view:</th></tr>";
         foreach ($array as $value) {
             $payment = $value['payment'] ? "true" : "false";
             $state_duty_payment = $value['state_duty_payment'] ? "true" : "false";
@@ -19,7 +19,7 @@
         $localfile = $xmlPath;
         $remotefile = 'result.xml';
         $fp = fopen($localfile, 'r');
-        curl_setopt($ch, CURLOPT_URL, 'ftp://'.$ftp_user_name.':'.$ftp_user_pass.'@'.$ftp_server.'/'.$remotefile);
+        curl_setopt($ch, CURLOPT_URL, 'ftp://'.$ftp_user_name.':'.$ftp_user_pass.'@'.$ftp_server.'/files/v1/'.$remotefile);
         curl_setopt($ch, CURLOPT_UPLOAD, 1);
         curl_setopt($ch, CURLOPT_INFILE, $fp);
         curl_setopt($ch, CURLOPT_INFILESIZE, filesize($localfile));
@@ -27,8 +27,7 @@
         $error_no = curl_errno($ch);
         curl_close ($ch);
         if ($error_no != 0) {
-            $error = 'File uploaded succesfully.';
-            die($error);
+            AddError("File uploaded error");
         }
     }
 ?>

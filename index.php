@@ -1,7 +1,8 @@
 <?php
-    require_once __DIR__ ."./phpFiles/recordBdInJson.php";
-    require_once __DIR__ ."./phpFiles/databaseConnect.php";
-    require_once __DIR__ ."./phpFiles/xml.php";
+    require_once __DIR__ ."/phpFiles/recordBdInJson.php";
+    require_once __DIR__ ."/phpFiles/databaseConnect.php";
+    require_once __DIR__ ."/phpFiles/xml.php";
+    require_once __DIR__ ."/phpFiles/errors.php";
     //RecordJson();
 
     //FTP XML UPLOAD
@@ -20,8 +21,7 @@
             $fun($connect, $ids, $has_electonic_view, $ftp_data);
         }
     } catch (\Throwable $th) {
-        echo $th."<br>";
-        die("<span style=font-size:16px;><b>Error:</b> Function ".$fun." not found</span>");
+        AddError("Function ".$fun." not found", $th);
     }
 
 
@@ -37,7 +37,7 @@
         }
 
         if(!$data){
-            die("<span style=font-size:16px;><b>Error:</b> No data found with the specified parameters</span>");
+            AddError("No data found with the specified parameters");
         }
 
         UpdateXML($data, "./result.xml", $ftp_data["ftp_server"], $ftp_data["ftp_user_name"], $ftp_data["ftp_user_pass"]);
@@ -48,7 +48,7 @@
 
     function getUsluga($connect, $ids, $has_electonic_view, $ftp_data){
         if(!isset($ids)){
-            die("<span style=font-size:16px;><b>Error:</b> Missing uslugaId argument</span>");
+            AddError("Missing uslugaId argument");
         }
         if(!is_array($ids)){
             $ids = array($ids);
@@ -63,11 +63,11 @@
                     $data[] = $item;
                 }
                 else{
-                    die("<span style=font-size:16px;><b>Error:</b> Record with <b>ID=".$id."</b> not found</span>");
+                    AddError("Record with ID=".$id."");
                 }
             }
             else{
-                die("<span style=font-size:16px;><b>Error:</b> The ID parameter is undefined or less than or equal to 0</span>");
+                AddError("The ID parameter is undefined or less than or equal to 0");
             }
         }
         if($data){
