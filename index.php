@@ -8,7 +8,7 @@
     //FTP XML UPLOAD
     $ftp_server = '37.140.192.158';
     $ftp_user_name = 'u1656895_practic';
-    $ftp_user_pass = 'iJ2rC8cN9x';
+    $ftp_user_pass = '';
     $ftp_data = array("ftp_server" => $ftp_server, "ftp_user_name" => $ftp_user_name, "ftp_user_pass" => $ftp_user_pass);
 
     $connect = ConnectDb();
