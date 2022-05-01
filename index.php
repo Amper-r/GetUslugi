@@ -29,9 +29,9 @@
         if(!isset($has_electronic_view )){
             $has_electronic_view  = 1;
         }
-        $has_electronic_view _str =  $has_electronic_view  < 0 ? "" : "WHERE has_electronic_view =".$has_electronic_view ;
+        $has_electronic_view_str =  $has_electronic_view  < 0 ? "" : "WHERE has_electronic_view =".$has_electronic_view ;
 
-        $query = $connect->query("SELECT * FROM products ".$has_electronic_view _str."");
+        $query = $connect->query("SELECT * FROM products ".$has_electronic_view_str."");
         while($row = $query->fetch_assoc()){
             $data[] = $row;
         }
