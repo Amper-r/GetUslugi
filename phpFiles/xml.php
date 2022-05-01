@@ -10,7 +10,7 @@
             $payment = $value['payment'] ? "true" : "false";
             $state_duty_payment = $value['state_duty_payment'] ? "true" : "false";
 
-            $str = $str."<tr><th>".$value['id']."</th><th>".$value['name']."</th><th>".$value['organization']."</th><th>".$payment."</th><th>".$state_duty_payment."</th><th>".$value['has_electronic_view ']."</th></tr>";
+            $str = $str."<tr><th>".$value['id']."</th><th>".$value['name']."</th><th>".$value['organization']."</th><th>".$payment."</th><th>".$state_duty_payment."</th><th>".$value['has_electronic_view']."</th></tr>";
         }
         $str = $str."</table>";
         $dom->loadXML($str);

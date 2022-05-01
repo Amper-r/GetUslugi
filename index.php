@@ -15,21 +15,21 @@
 
     $fun = $_GET["task"];
     $ids = $_GET["uslugaId"];
-    $has_electronic_view  = $_GET["has_electronic_view "];
+    $has_electronic_view = $_GET["has_electronic_view"];
     try {
         if(isset($fun)){
-            $fun($connect, $ids, $has_electronic_view , $ftp_data);
+            $fun($connect, $ids, $has_electronic_view, $ftp_data);
         }
     } catch (\Throwable $th) {
         AddError("Function ".$fun." not found", $th);
     }
 
 
-    function getUslugi($connect, $id, $has_electronic_view , $ftp_data){
-        if(!isset($has_electronic_view )){
-            $has_electronic_view  = 1;
+    function getUslugi($connect, $id, $has_electronic_view, $ftp_data){
+        if(!isset($has_electronic_view)){
+            $has_electronic_view = 1;
         }
-        $has_electronic_view_str =  $has_electronic_view  < 0 ? "" : "WHERE has_electronic_view =".$has_electronic_view ;
+        $has_electronic_view_str =  $has_electronic_view < 0 ? "" : "WHERE has_electronic_view=".$has_electronic_view;
 
         $query = $connect->query("SELECT * FROM products ".$has_electronic_view_str."");
         while($row = $query->fetch_assoc()){
@@ -46,7 +46,7 @@
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
-    function getUsluga($connect, $ids, $has_electronic_view , $ftp_data){
+    function getUsluga($connect, $ids, $has_electronic_view, $ftp_data){
         if(!isset($ids)){
             AddError("Missing uslugaId argument");
         }
