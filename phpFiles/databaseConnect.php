@@ -2,7 +2,7 @@
     function ConnectDb(){
         $server = "37.140.192.158";
         $username = "u1656895_practic";
-        $password = "mM6qO7jZ5h";
+        $password = "";
         $dbname = "u1656895_practic";
         $charset = "utf8";
         
